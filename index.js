@@ -1,4 +1,6 @@
-require('dotenv/config');
+require('dotenv').config();
+
+console.log(process.env.TOKEN)
 
 const { Client } = require('./src/index');
 
@@ -22,9 +24,9 @@ const client = new Client({
 client.login().then(async () => {
 
     client.log(`BOT iniciado com sucesso.`, { color: 'green', tags: ['discord client'] });
-    
+
     setTimeout(() => client.user.setStatus('online'), 30000)
-    
+
     await client.connectdatabase();
     await client.loadModules();
 }).catch(err => {
