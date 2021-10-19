@@ -12,6 +12,6 @@ module.exports = class interactionCreateEvent {
 
         if (verify) return;
 
-        cmd.run({ message: interaction, player });
+        cmd.run({ message: interaction });
     }
 }
