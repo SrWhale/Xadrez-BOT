@@ -1,12 +1,5 @@
-const dotenv = require('dotenv');
+require('dotenv/config');
 
-const result = dotenv.config();
-
-if (result.error) {
-    throw result.error
-}
-
-console.log(result.parsed)
 const { Client } = require('./src/index');
 
 const client = new Client({
