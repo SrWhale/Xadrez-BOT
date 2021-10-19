@@ -45,8 +45,8 @@ module.exports = class commandLoader {
         const rest = new REST({ version: '9' }).setToken(this.client.token);
 
         try {
-            await rest.put(Routes.applicationCommands(this.client.user.id), {
-            	body: commands
+            await rest.put(Routes.applicationGuildCommands(this.client.user.id, '892778828127141948'), {
+                body: commands
             });
 
             this.client.log(`Slash Commands atualizados.`, { color: 'green', tags: ['Slash Commands'] });

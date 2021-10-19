@@ -31,6 +31,7 @@ module.exports = class ChallengeCommand extends Command {
         const pngImage = new MessageAttachment(buff, 'challenge.png');
 
         return message.reply({
+            content: `Solução: ${challenge.puzzle.solution.join(", ")}`,
             files: [pngImage]
         })
     }
