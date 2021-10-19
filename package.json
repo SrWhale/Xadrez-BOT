@@ -19,5 +19,8 @@
     "lodash": "^4.17.21",
     "ms": "^2.1.2",
     "chess-image-generator": "^1.0.9"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
