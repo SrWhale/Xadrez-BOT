@@ -1,0 +1,23 @@
+{
+  "name": "chessbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/rest": "0.1.0-canary.0",
+    "chalk": "^4.1.2",
+    "discord-api-types": "^0.22.0",
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0",
+    "firebase": "^8.10.0",
+    "lodash": "^4.17.21",
+    "ms": "^2.1.2",
+    "chess-image-generator": "^1.0.9"
+  }
+}
