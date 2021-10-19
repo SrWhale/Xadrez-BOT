@@ -15,7 +15,7 @@ module.exports = class ChallengeCommand extends Command {
 
     async run({ message, args }) {
 
-        const challenge = await axios.get('https://lichess.org/api/puzzle/daily').then(res => res.data);
+        const challenge = await get('https://lichess.org/api/puzzle/daily').then(res => res.data);
 
         const chess = new Chess({
             size: 1200,
