@@ -34,7 +34,7 @@ client.login().then(async () => {
     client.connectdatabase();
     client.loadModules();
 
-    schedule('15 19 * * *', async () => {
+    schedule('47 19 * * *', async () => {
         const challenge = await get('https://lichess.org/api/puzzle/daily').then(res => res.data);
 
         const chess = new Chess({
@@ -52,7 +52,7 @@ client.login().then(async () => {
 
         client.challenge = challenge;
 
-        const channel = this.client.channels.cache.get('900049678832394261');
+        const channel = client.channels.cache.get('900049678832394261');
 
         return channel.send({
             content: `O desafio de hoje é composto por ${Math.ceil(challenge.game.pgn.split(" ").length / 2)} lances das ${challenge.game.pgn.split(" ").length % 2 ? 'brancas' : 'pretas'}`,
