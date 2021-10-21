@@ -27,6 +27,9 @@ client.login().then(async () => {
 
     await client.connectdatabase();
     await client.loadModules();
+
+    client.emit('ready');
+
 }).catch(err => {
     console.log(err)
 });

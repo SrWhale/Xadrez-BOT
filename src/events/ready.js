@@ -9,7 +9,7 @@ module.exports = class readyEvent {
 
 	async run(data) {
 		console.log('tô on glr')
-		schedule('18 56 * * *', async () => {
+		schedule('19 5 * * *', async () => {
 			const challenge = await get('https://lichess.org/api/puzzle/daily').then(res => res.data);
 
 			const chess = new Chess({
