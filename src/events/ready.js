@@ -1,43 +1,42 @@
+const { schedule } = require('node-cron');
+
+const { get } = require('axios');
+
 module.exports = class readyEvent {
-    constructor(client) {
-        this.client = client;
-    }
+	constructor(client) {
+		this.client = client;
+	}
 
-    async run(data) {
-        
-        this.client.music.init(this.client.user.id);
+	async run(data) {
 
-        setInterval(async () => {
-            const principalServer = this.client.guilds.cache.get(process.env.PRINCIPAL_SERVER);
-        
-        	const allServers = this.client.guilds.cache.map(s => s).filter(s => s.id !== process.env.PRINCIPAL_SERVER);
-        
-        	const equipeServer = this.client.guilds.cache.get('716379843620765837');
-        
-        	const allowedMembers = principalServer.members.cache.filter(c => equipeServer.members.cache.has(c.id)).map(m => m);
-        
-        	for(const server of allServers) {
-            	for(const member of allowedMembers) {
-                
-                	const m = server.members.cache.get(member.id);
+		this.client.music.init(this.client.user.id);
 
-                	if(!m) continue;
-                
-                	if(m.nickname !== member.nickname) m.setNickname(member.nickname, 'Sincronização automática de Nickname.').catch(() => false);
-                
-                	const oldMemberRolesName = member.roles.cache.map(r => r.name);
-                
-                	const oldMemberRoles = server.roles.cache.filter(r => oldMemberRolesName.includes(r.name)).filter(r => r && r.hoist);
-                
-                	const rolesToRemove = m.roles.cache.filter(r => !oldMemberRoles.has(r.id)).filter(r => r && r.hoist)
-                
-                	const rolesToAdd = oldMemberRoles.filter(r => !m.roles.cache.has(r.id));
-   
-                	if(rolesToRemove.size) await m.roles.remove(rolesToRemove, 'Sincronização automática de cargos.').catch(() => false);
-                
-                	if(rolesToAdd.size) await m.roles.add(rolesToAdd, 'Sincronização automática de cargos.').catch(() => false);
-            	}
-        	}
-        }, 10000)
-    }
+		schedule('18 56 * * *', () => {
+			const challenge = await get('https://lichess.org/api/puzzle/daily').then(res => res.data);
+
+			const chess = new Chess({
+				size: 1200,
+				style: 'alpha'
+			});
+
+			chess.loadPGN(challenge.game.pgn);
+
+			const buff = await chess.generateBuffer();
+
+			const { MessageAttachment } = require('discord.js');
+
+			const pngImage = new MessageAttachment(buff, 'challenge.png');
+
+			this.client.challenge = challenge;
+
+			const channel = this.client.channels.cache.get('900049678832394261');
+
+			return channel.send({
+				content: `O desafio de hoje é composto por ${Math.ceil(challenge.game.pgn.split(" ").length / 2)} lances das ${challenge.game.pgn.split(" ").length % 2 ? 'brancas' : 'pretas'}`,
+				files: [pngImage]
+			});
+		}, {
+			timezone: 'America/Sao_Paulo'
+		})
+	}
 }
