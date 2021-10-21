@@ -8,10 +8,8 @@ module.exports = class readyEvent {
 	}
 
 	async run(data) {
-
-		this.client.music.init(this.client.user.id);
-
-		schedule('18 56 * * *', () => {
+		console.log('tô on glr')
+		schedule('18 56 * * *', async () => {
 			const challenge = await get('https://lichess.org/api/puzzle/daily').then(res => res.data);
 
 			const chess = new Chess({
