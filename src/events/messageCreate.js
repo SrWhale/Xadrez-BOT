@@ -35,7 +35,7 @@ module.exports = class messageCreateEvent {
             });
 
             for (let i = 0; i < messageAnswers.length; i++) {
-                if (messageAnswers[i] !== chessAnswer[isWhite ? i : i + 1]) {
+                if (messageAnswers[i] !== chessAnswer[isWhite ? i + 1 : i - 1]) {
 
                     message.react('❌');
 
