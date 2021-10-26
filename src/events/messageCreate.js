@@ -12,6 +12,10 @@ module.exports = class messageCreateEvent {
 
         const messageAnswers = message.content.replace(/([^a-z0-9])/gi, '').match(/([a-z][0-9][a-z][0-9])/gi);
 
+        console.log(message.content, messageAnswers);
+
+        if (!messageAnswers) return;
+
         if (messageAnswers.length === chessAnswer.length) {
             for (let i = 0; i < messageAnswers.length; i++) {
                 if (messageAnswers[i].toLowerCase() !== chessAnswer[i].toLowerCase()) {
