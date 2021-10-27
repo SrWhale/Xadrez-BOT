@@ -34,7 +34,7 @@ client.login().then(async () => {
     client.connectdatabase();
     client.loadModules();
 
-    schedule('14 21 * * *', async () => {
+    schedule('0 8 * * *', async () => {
         const challenge = await get('https://lichess.org/api/puzzle/daily').then(res => res.data);
 
         const chess = new Chess({
