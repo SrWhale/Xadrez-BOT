@@ -39,7 +39,7 @@ module.exports = class messageCreateEvent {
             });
 
             for (let i = 0; i < messageAnswers.length; i++) {
-                if (messageAnswers[i] !== chessAnswer[i + 2]) {
+                if (messageAnswers[i] !== chessAnswer[(i * 2) + 1]) {
 
                     message.react('❌');
 
