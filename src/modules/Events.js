@@ -32,8 +32,6 @@ module.exports = class EventLoader {
                         e = e[eventPath[i]];
                     }
 
-                    console.log(e.toString())
-
                     e.on(file.replace('.js', ''), (...args) => event.run(...args));
 
                     return event;

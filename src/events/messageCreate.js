@@ -12,8 +12,6 @@ module.exports = class messageCreateEvent {
 
         const messageAnswers = message.content.replace(/([^a-z0-9])/gi, '').match(/([a-z][0-9][a-z][0-9])/gi);
 
-        console.log(message.content, messageAnswers);
-
         if (!messageAnswers) return;
 
         if (messageAnswers.length === chessAnswer.length) {
@@ -25,24 +23,38 @@ module.exports = class messageCreateEvent {
                     break;
                 }
 
-                else if (i === messageAnswers.length - 1) message.react('✅')
+                else if (i === messageAnswers.length - 1) {
+
+                    message.react('✅');
+
+                    message.reply({
+                        content: 'Parabéns, você acertou os movimentos!'
+                    })
+                }
             }
         } else {
-            const isWhite = chessGame.game.pgn.split(" ").length % 2;
 
             if (messageAnswers.length < Math.ceil(chessGame.puzzle.solution.length / 2)) return message.reply({
                 content: `Para vencer, são necessários \`${Math.ceil(chessGame.puzzle.solution.length / 2)}\` lances, você colocou apenas \`${messageAnswers.length}\` `
             });
 
             for (let i = 0; i < messageAnswers.length; i++) {
-                if (messageAnswers[i] !== chessAnswer[isWhite ? i + 1 : i - 1]) {
+                if (messageAnswers[i] !== chessAnswer[i + 2]) {
 
                     message.react('❌');
 
                     break;
                 }
 
-                else if (i === messageAnswers.length - 1) message.react('✅')
+                else if (i === messageAnswers.length - 1) {
+
+                    message.react('✅');
+
+                    message.reply({
+                        content: 'Parabéns, você acertou os movimentos!'
+                    });
+
+                }
             }
         }
     }
