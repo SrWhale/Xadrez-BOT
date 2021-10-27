@@ -39,7 +39,10 @@ module.exports = class messageCreateEvent {
             });
 
             for (let i = 0; i < messageAnswers.length; i++) {
-                if (messageAnswers[i] !== chessAnswer[(i * 2) + 1]) {
+                if (messageAnswers[i].toLowerCase() !== chessAnswer[(i * 2) + 1].toLowerCase()) {
+                    console.log(messageAnswers[i].toLowerCase());
+                    console.log(i);
+                    console.log(chessAnswer[(i * 2) + 1].toLowerCase());
 
                     message.react('❌');
 
