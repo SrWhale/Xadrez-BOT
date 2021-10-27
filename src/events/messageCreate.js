@@ -39,7 +39,7 @@ module.exports = class messageCreateEvent {
             });
 
             for (let i = 0; i < messageAnswers.length; i++) {
-                if (messageAnswers[i].toLowerCase() !== chessAnswer[(i * 2) + 1].toLowerCase()) {
+                if (messageAnswers[i].toLowerCase() !== chessAnswer[i ? (i * 2) : 0].toLowerCase()) {
                     console.log(messageAnswers[i].toLowerCase());
                     console.log(i);
                     console.log(chessAnswer[(i * 2) + 1].toLowerCase());
